@@ -115,14 +115,16 @@ def face_compare(frame,process_this_frame):
 # starting video streaming
 
 cv2.namedWindow('window_frame')
-video_capture = cv2.VideoCapture(0)
+video_capture = cv2.VideoCapture(1)
 
 # Select video or webcam feed
-cap = None
-if (USE_WEBCAM == True):
-    cap = cv2.VideoCapture(0) # Webcam source
-else:
-    cap = cv2.VideoCapture('./test/testvdo.mp4') # Video file source
+
+
+cap = cv2.VideoCapture(1)
+#if (USE_WEBCAM == True):
+#    cap = cv2.VideoCapture(2) # Webcam source
+#else:
+#    cap = cv2.VideoCapture('./test/testvdo.mp4') # Video file source
 
 while cap.isOpened(): # True:
     ret, frame = cap.read()
@@ -137,7 +139,7 @@ while cap.isOpened(): # True:
     #             cv2.circle(frame, (x, y), 1, (255,0, 0), -1)
 
 
-    gray_image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    gray_image = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
     rgb_image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
     faces = detector(rgb_image)
@@ -196,6 +198,7 @@ while cap.isOpened(): # True:
 
     frame = cv2.cvtColor(rgb_image, cv2.COLOR_RGB2BGR)
     cv2.imshow('window_frame', frame)
+    
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
